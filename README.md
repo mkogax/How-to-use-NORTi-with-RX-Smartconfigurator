@@ -71,11 +71,14 @@ Target Board for RX130 に内蔵されたE2Lite相当エミュレータを経由
 NORTiタスクの状態表示/起動終了制御などを行うコマンドを実装しました。  
 
 ```text
+** GG for CCRX **
+tskpri=1
 >task
-tid= 1 taskg      RUN  pri= 1 stack=0000081C(size= 1024)
-tid= 2 task1      RDY  pri= 8 stack=00000C1C(size=  256)
-tid= 3 task2      DMT  pri= 8 stack=00000D1C(size=  256)
-tid= 4 task3      DMT  pri= 8 stack=00000E1C(size=  256)
+tid= 1 taskg      RUN  pri= 1 stack=00000820(size= 1024)
+tid= 2 task1      DMT  pri= 8 stack=00000C20(size=  256)
+tid= 3 task2      DMT  pri= 8 stack=00000D20(size=  256)
+tid= 4 task3      DMT  pri= 8 stack=00000E20(size=  256)
+tid= 5 task4      DMT  pri= 8 stack=00000F20(size=  256)
 >task ?
 (usage)
 task                       タスク一覧(状態表示)
@@ -92,6 +95,18 @@ task wup <tid>             wup_tsk(tid)
 task canw <tid>            can_wup(tid)
 task rel <tid>             rel_wai(tid)
 (tidは数値でもタスク名でも可)
+>help
+        help [cmd..]                  : command help
+-- memory command --
+          md [addr [alen]]            : mem dump
+          ms addr data..              : mem set
+          mf addr alen data           : mem fill
+-- Example of original command registration --
+       test1 [...]                    : Display command line arguments when executing this command
+        task [...]                    : Display and control task status
+         cmt                          : CMT(FITモジュール) NORTi用タイマ設定状態表示
+-- TP command --
+          tp [#1 [#2]]                : TP(test point) select
 >
 ```
 
