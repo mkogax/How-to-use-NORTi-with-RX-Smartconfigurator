@@ -21,8 +21,8 @@ NoMaYさんが発案したプログラムを中心に解説しています。NoM
 1. RXシリーズの開発環境(CS+,CC-RX)でプロジェクトを作ります
 2. プロジェクトにNoMaYさんの下記プログラムを追加します
 
-* [NORTi_interrupt.c](code\NORTi_interrupt.c)
-* [NORTi_interrupt.h](code\NORTi_interrupt.h)
+* [NORTi_interrupt.c](code/NORTi_interrupt.c)
+* [NORTi_interrupt.h](code/NORTi_interrupt.h)
 
 3. NORTiを組み込みます()
 4. NORTiのintini()の "initialize interrupt vector table" 部分を以下と入れ替えます
@@ -102,9 +102,9 @@ flowchart LR
 
 実験時のプログラムソース(参考)
 
-* [GG_NORTi.c](code\GG_NORTi.c)  メインプログラム
-* [GG_NORTi_task.c](code\GG_NORTi_task.c)  タスク制御（GGコンソール用コマンド)
-* [gg_sysdef.h](code\gg_sysdef.h)  GGコンソール設定(TP機能)
+* [GG_NORTi.c](code/GG_NORTi.c)  メインプログラム
+* [GG_NORTi_task.c](code/GG_NORTi_task.c)  タスク制御（GGコンソール用コマンド)
+* [gg_sysdef.h](code/gg_sysdef.h)  GGコンソール設定(TP機能)
 
 ### 実験１．r_cmt_rx(FIT)の10msec周期コールバックからNORTiのチックタイム通知(isig_tim())
 
@@ -131,7 +131,7 @@ TP2 =  30 (-1=do nothing)
 上 TP1=900(cmt_10msec_callback()処理)  
 下 TP2=30(taskgタスクのメインループの10msec待ちの「出口」)  
 
-<img src="image\M1-001.jpg" width="50%">
+<img src="image/M1-001.jpg" width="50%">
 
 約10msec周期でisig_tim()から約15usec後に10msec待ちが解除されています。  
 (オシロの時間軸を長くして10msec周期である確認もしています)
@@ -178,7 +178,7 @@ TP2 = 100 (-1=do nothing)
 上 TP1=101(task1_TMR0_callback()処理)  
 下 TP2=100(task1タスクのメインループでslp_tsk()から抜けるとパルス)  
 
-<img src="image\M2-002.jpg" width="50%">
+<img src="image/M2-002.jpg" width="50%">
 
 task1_TMR0_callback()処理はタスク名文字列でタスクIDの検索をしているので時間がかかっているようです。(約30usec)  
 wup_tsk()から5.9usec後にslp_tsk()が解除されています。  
@@ -235,7 +235,7 @@ TP2 = 200 (-1=do nothing)
 上 TP1=201(task2_TMR1_callback()処理)  
 下 TP2=200(task2タスクのメインループでslp_tsk()から抜けるとパルス)  
 
-<img src="image\M3-001.jpg" width="50%">
+<img src="image/M3-001.jpg" width="50%">
 
 task2_TMR1_callback()処理もタスク名文字列でタスクIDの検索をしているので時間がかかっているようです。(約40usec)  
 wup_tsk()から5.5usec後にslp_tsk()が解除されています。  
@@ -290,7 +290,7 @@ TP2 = 302 (-1=do nothing)
 上 TP1=301(task3_TMR2_callback()処理)  
 下 TP2=302(task3_TMR2_callback2()処理)  
 
-<img src="image\M4-001.jpg" width="50%">
+<img src="image/M4-001.jpg" width="50%">
 
 1回の割り込みで2つのサービスルーチンがコールされるようセットしています。
 task3_TMR2_callback()処理は約50usec、task3_TMR2_callback2()処理は約40usecかかっています。検索タスク名の違いが処理時間に関係していることが分かります。  
@@ -306,7 +306,7 @@ TP2 = 300 (-1=do nothing)
 上 TP1=301(task3_TMR2_callback()処理 task3をwup_tsk())  
 下 TP2=300(task3タスクのメインループでslp_tsk()から抜けるとパルス)  
 
-<img src="image\M4-002.jpg" width="50%">
+<img src="image/M4-002.jpg" width="50%">
 
 task3_TMR2_callback2()処理のぶん遅れるので、wup_tsk()から47.6usec後にslp_tsk()が解除されています。  
 
@@ -320,7 +320,7 @@ TP2 = 200 (-1=do nothing)
 上 TP1=302(task3_TMR2_callback2()処理 task2をwup_tsk())  
 下 TP2=200(task2タスクのメインループでslp_tsk()から抜けるとパルス)  
 
-<img src="image\M4-003.jpg" width="50%">
+<img src="image/M4-003.jpg" width="50%">
 
 task3_TMR2_callback2()処理のwup_tsk()から26.6usec後にslp_tsk()が解除されています。この遅れ時間は、その直前にtask3のslp_tsk()が先に解除されふたたびtask3がslp_tsk()になるまで待たされたためだと思われます。
 
@@ -334,7 +334,7 @@ TP2 = 200 (-1=do nothing)
 上 TP1=300(task3タスクのメインループでslp_tsk()から抜けるとパルス)  
 下 TP2=200(task2タスクのメインループでslp_tsk()から抜けるとパルス)  
 
-<img src="image\M4-004.jpg" width="50%">
+<img src="image/M4-004.jpg" width="50%">
 
 確認してみると、やはりtask3のlp_tsk()が解除されふたたびtask3がslp_tsk()になってから8.2usec後にtask2のslp_tsk()が解除されています。
 
