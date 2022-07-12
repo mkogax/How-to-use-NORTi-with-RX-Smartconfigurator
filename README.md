@@ -47,10 +47,15 @@ NoMaYさんが発案したプログラムを中心に解説しています。NoM
 
 ## 効果
 
-* FIT/CGは改変なしでそのままNORTiを利用できます。(コールバックでNORTi利用可)
-* NORTiの割込みハンドラ(def_inh())をそのまま利用できます。
-* NORTiの割込みサービスルーチン(cre_isr())をそのまま利用できます。（最初におまじない必要）
-* FIT/CGの割込み処理はNORTi対応で少しオーバヘッドが増えますが、NORTiを使わないで高速に処理したい場合(nonOS)はdef_inh()で対応できます。
+### 1. FIT/CGは改変なしでそのままNORTiを利用できます。(コールバックでNORTi利用可)
+
+### 2. NORTiの割込みハンドラ(def_inh())をそのまま利用できます。
+
+### 3. NORTiの割込みサービスルーチン(cre_isr())をそのまま利用できます。（最初におまじない必要）
+
+割込みサービスルーチン(cre_isr())を使う前に、1回だけ def_inh(割り込み番号, NULL) をしてください。NULLを指定することで、その割込み番号だけNoMaYさんのInt_Hook_Vectors[]の代わりにNORTiの管理用ルーチンがセットされます。
+
+### 4. FIT/CGの割込み処理はNORTi対応で少しオーバヘッドが増えますが、NORTiを使わないで高速に処理したい場合(nonOS)はdef_inh()で対応できます。
 
 ## 実験(Target Board for RX130,CS+)
 
@@ -62,7 +67,7 @@ NoMaYさんが発案したプログラムを中心に解説しています。NoM
 * [Target Board for RX130](https://www.renesas.com/jp/ja/products/microcontrollers-microprocessors/rx-32-bit-performance-efficiency-mcus/rtk5rx1300c00000br-target-board-rx130)
 * [GG for CC-RX(EMU)](https://github.com/mkogax/GG_for_CCRX)
 
-E2Lite経由のデバッグコンソールでGGコンソール機能(GG for CC-RX)を使います。  
+Target Board for RX130 に内蔵されたE2Lite相当エミュレータを経由したデバッグコンソールでGGコンソール機能(GG for CC-RX)を使います。  
 NORTiタスクの状態表示/起動終了制御などを行うコマンドを実装しました。  
 
 ```text
@@ -383,9 +388,10 @@ TP2 = 400 (-1=do nothing)
 ```
 
 上 TP1=401(task4_TMR3_callback()処理)  
-下 TP2=400(task4タスクのメインループでslp_tsk()から抜けるとパルス)  
+下 TP2=400(task4タスクのメインループでtask4_counterの変化を検出するとパルス)  
 
 https://user-images.githubusercontent.com/11693904/178516010-ede07447-d9a4-41cc-be2b-f0aa140e5023.mp4
 
 task4_TMR3_callback()は8bitタイマを使用してきっちりmsec単位ではありません。一方、task4では10msecごとにtask4_counterをチェックするのでtask4_TMR3_callback()のタイミングと微妙にずれていきます。
 動画ではtask4でtask4_counterの変化を検出するタイミングがずれていく様子が分かります。
+(下は残像のためか2パルスに見えるときがありますが、本当は1パルスのみです)
