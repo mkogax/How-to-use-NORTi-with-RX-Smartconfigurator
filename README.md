@@ -25,7 +25,7 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 * [NORTi_interrupt.c](code/NORTi_interrupt.c)
 * [NORTi_interrupt.h](code/NORTi_interrupt.h)
 
-3. NORTiを組み込みます()
+3. NORTiを組み込みます
 4. NORTiのintini()の "initialize interrupt vector table" 部分を以下と入れ替えます
 
 ```c
