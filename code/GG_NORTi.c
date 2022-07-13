@@ -281,10 +281,3 @@ void main(void)
 
     syssta();       // NORTi開始
 }
-
-#ifdef __cplusplus
-void abort(void)
-{
-
-}
-#endif
