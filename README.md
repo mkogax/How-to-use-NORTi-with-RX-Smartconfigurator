@@ -1,5 +1,7 @@
 # NORTi を RX Smartconfigurator と一緒に使う方法
 
+<br />
+
 かふぇルネから飛んでこられた方。こんにちは、ふぐりんです。  
 このドキュメントは「NORTi を RX Smartconfigurator と一緒に使う方法」の解説です。  
 
@@ -19,6 +21,8 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 【ご利用について】  
 ここで解説されている情報は商用/非商用にかかわらずご利用いただけますが、何も保証しません。
 </sub>
+
+<br /><br /><br />
 
 ## セットアップ
 
@@ -49,6 +53,8 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 
 上記でセットアップは完了です。  
 
+<br /><br /><br />
+
 ## 効果
 
 ### 1. FIT/CGは改変なしでそのままNORTiを利用できます。
@@ -62,6 +68,8 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 割込みサービスルーチン(cre_isr())を使う前に、1回だけ def_inh(割り込み番号, NULL) をしてください。NULLを指定することで、その割込み番号だけNoMaYさんのInt_Hook_Vectors[]の代わりにNORTiの管理用ルーチンがセットされます。
 
 ### 4. FIT/CGの割込み処理はNORTi対応で少しオーバヘッドが増えますが、NORTiを使わないで高速に処理したい場合(nonOS)はdef_inh()で対応できます。
+
+<br /><br /><br />
 
 ## 実験(Target Board for RX130,CS+)
 
@@ -132,6 +140,8 @@ flowchart LR
 * [GG_NORTi_task.c](code/GG_NORTi_task.c)  タスク制御（GGコンソール用コマンド)
 * [gg_sysdef.h](code/gg_sysdef.h)  GGコンソール設定(TP機能)
 
+<br /><br />
+
 ### 実験１．r_cmt_rx(FIT)の10msec周期コールバックからNORTiのチックタイム通知(isig_tim())
 
 ```c
@@ -161,6 +171,8 @@ TP2 =  30 (-1=do nothing)
 
 約10msec周期でisig_tim()から約15usec後に10msec待ちが解除されています。  
 (オシロの時間軸を長くして10msec周期である確認もしています)
+
+<br /><br />
 
 ### 実験２．TMR0(CG)で#pragma interrupt の割込みルーチンからタスク起床(wup_tsk())
 
@@ -208,6 +220,8 @@ TP2 = 100 (-1=do nothing)
 
 task1_TMR0_callback()処理はタスク名文字列でタスクIDの検索をしているので時間がかかっているようです。(約30usec)  
 wup_tsk()から5.9usec後にslp_tsk()が解除されています。  
+
+<br /><br />
 
 ### 実験３．TMR1(CG)の改造でdef_inh() のNORTi割込みハンドラからタスク起床(wup_tsk())
 
@@ -266,6 +280,8 @@ TP2 = 200 (-1=do nothing)
 
 task2_TMR1_callback()処理もタスク名文字列でタスクIDの検索をしているので時間がかかっているようです。(約40usec)  
 wup_tsk()から5.5usec後にslp_tsk()が解除されています。  
+
+<br /><br />
 
 ### 実験４．TMR2(CG)の改造でcre_isr() のNORTi割込みサービスルーチンからタスク起床(wup_tsk())
 
@@ -367,6 +383,8 @@ TP2 = 200 (-1=do nothing)
 
 確認してみると、やはりtask3のslp_tsk()が解除されふたたびtask3がslp_tsk()になってから8.2usec後にtask2のslp_tsk()が解除されています。
 
+<br /><br />
+
 ### 実験５．TMR3(CG)で#pragma interrupt の割込みルーチンを非NORTiとして再登録(def_inh())してカウンタ変数更新を確認
 
 ```c
@@ -422,6 +440,8 @@ https://user-images.githubusercontent.com/11693904/178516010-ede07447-d9a4-41cc-
 task4_TMR3_callback()は8bitタイマを使用してきっちりmsec単位ではありません。一方、task4では10msecごとにtask4_counterをチェックするのでtask4_TMR3_callback()のタイミングと微妙にずれていきます。
 動画ではtask4でtask4_counterの変化を検出するタイミングがずれていく様子が分かります。
 (下は残像のためか2パルスに見えるときがありますが、本当は1パルスのみです)
+
+<br /><br /><br />
 
 ## おまけ１（スタックがぎりぎりやった）
 
@@ -649,6 +669,8 @@ tid= 5 task4      WAIT pri= 7 stack=00000F20(size=  256)
 00001000  07 00 00 00 05 05 05 05  00 00 00 00 00 00 00 00  ........ ........
 00001010  00 00 00 00 00 00 00 00  00 00 00 00 3B 84 F8 FF  ........ ....;...
 ```
+
+<br /><br /><br />
 
 ## おまけ２（エミュレータ経由のデバッグコンソール出力はけっこう遅い）
 
