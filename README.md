@@ -69,6 +69,8 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 
 ### 4. FIT/CGの割込み処理はNORTi対応で少しオーバヘッドが増えますが、NORTiを使わないで高速に処理したい場合(nonOS)はdef_inh()で対応できます。
 
+### 【注意】INT/BRK(ベクタ番号0～15)と例外ベクタテーブルの割り込みはNORTi非対応です。
+
 <br /><br /><br />
 
 ## 実験(Target Board for RX130,CS+)
