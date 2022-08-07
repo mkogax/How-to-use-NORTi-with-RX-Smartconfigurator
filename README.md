@@ -22,8 +22,10 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 ここで解説されている情報は商用/非商用にかかわらずご利用いただけますが、何も保証しません。
 </sub>
 
+<br /><br /><br />
+
 ## 動作の解説
-[**動作の解説**](https://github.com/mkogax/How-to-use-NORTi-with-RX-Smartconfigurator/../../../../README_exp.md)
+[**動作の解説**](README_exp.md)
 
 <br /><br /><br />
 
@@ -72,7 +74,7 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 
 ### 4. FIT/CGの割込み処理はNORTi対応で少しオーバヘッドが増えますが、NORTiを使わないで高速に処理したい場合(nonOS)はdef_inh()で対応できます。
 
-### 【注意】INT/BRK(ベクタ番号0～15)と例外ベクタテーブルの割り込みはNORTi非対応です。
+### 【注意】INT/BRK(ベクタ番号0～15)と例外ベクタテーブルの割り込みはNORTi非対応です。(割り込みレベル注意)
 
 <br /><br /><br />
 
