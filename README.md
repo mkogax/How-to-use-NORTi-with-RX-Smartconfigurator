@@ -22,6 +22,9 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 ここで解説されている情報は商用/非商用にかかわらずご利用いただけますが、何も保証しません。
 </sub>
 
+## 動作の解説
+[**動作の解説**](https://github.com/mkogax/How-to-use-NORTi-with-RX-Smartconfigurator/../../../../README_exp.md)
+
 <br /><br /><br />
 
 ## セットアップ
