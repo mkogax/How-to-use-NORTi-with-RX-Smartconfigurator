@@ -9,8 +9,8 @@
 
 経緯については以下のかふぇルネのスレッドをご覧ください。  
 
-* [スマートコンフィグレータの自動生成をカスタマイズしたい](https://japan.renesasrulz.com/cafe_rene/f/forum5/8248/thread)
-* [MISPOさんのNORTiをRX SmartConfiguratorと一緒に使いたい場合の課題と対策を考察してみるスレッド](https://japan.renesasrulz.com/cafe_rene/f/forum21/8266/mispo-norti-rx-smartconfigurator)
+* [スマートコンフィグレータの自動生成をカスタマイズしたい](https://community-ja.renesas.com/cafe_rene/f/forum5/8248/thread)
+* [MISPOさんのNORTiをRX SmartConfiguratorと一緒に使いたい場合の課題と対策を考察してみるスレッド](https://community-ja.renesas.com/cafe_rene/f/forum21/8266/mispo-norti-rx-smartconfigurator)
 
 <sub>【謝辞】  
 NoMaYさんが考案したプログラムを中心に解説しています。NoMaYさんにあらためてお礼申し上げます。  
