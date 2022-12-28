@@ -83,7 +83,7 @@ ka.makiharaさんにはNoMaYさんのプログラム作成に協力いただき�
 FIT内部で最高レベル15の割り込みが使用されていることがあり、それに気づかないままその割込みが発生すると、割込み処理初段のv3_ent_int()コールで暴走等の不具合が発生します。(【注意２】のBUSERRのNORTi非対応はその対策)  
 これはNORTiの使用条件（KNL_LEVEL(default=6)を越えた割り込みレベルでNORTiのシステムコールをしてはならない）に違反するためです。  
 FIT/CGの機能追加や修正は続きますし、BUSERRのように滅多に発生しないケースはデバッグで問題に気づかない可能性もあります。そこで、最高レベル15を含む全ての割り込みレベルでNORTiのシステムコールが使えるように、KNL_LEVELを15にしておくことを推奨します。  
-(以下のスレッドでNoMaYさんが推奨されていましたので上を追記しました)
+(以下のスレッドでNoMaYさんが推奨されていましたので上を追記しました)  
 https://community-ja.renesas.com/cafe_rene/forums-groups/tools/f/forum21/8266/mispo-norti-rx-smartconfigurator/47861#47861
 
 <br /><br /><br />
