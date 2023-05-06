@@ -27,7 +27,7 @@
 #define INTERRUPT__13 nonOS
 #define INTERRUPT__14 nonOS
 #define INTERRUPT__15 nonOS
-#define INTERRUPT__16 nonOS     // BUSERR   defaultでレベル15なので NORTiの V3_ent_intをコールできない(重複割込みとなり暴走する) 2022.12.23 M.Kogan
+#define INTERRUPT__16 nonOS     // BUSERR   defaultでレベル15なので NORTiの V3_ent_intをコールできない(重複割り込みとなり暴走する) 2022.12.23 M.Kogan
 #define INTERRUPT__17 NORTi
 #define INTERRUPT__18 NORTi
 #define INTERRUPT__19 NORTi

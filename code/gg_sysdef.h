@@ -99,11 +99,11 @@ SOFTWARE.
 
 
 //------------------
-//	割込み禁止制御
+//	割り込み禁止制御
 //------------------
 //【 ルネサス RXシリーズ 】		ルネサス コンパイラ CC-RX V2.05以降
-#define GG_DI_ON()		__clrpsw_i()	// 割込み禁止
-#define GG_DI_OFF()		__setpsw_i()	// 割込み許可
+#define GG_DI_ON()		__clrpsw_i()	// 割り込み禁止
+#define GG_DI_OFF()		__setpsw_i()	// 割り込み許可
 #define GG_DI_BEGIN()	{ uint32_t __psw=__get_psw(); GG_DI_ON(); GG_TP_ON(1);						// 割禁開始 TP#1=割禁状態
 #define GG_DI_END()		  __set_psw(__psw); if(__psw&0x10000) GG_TP_OFF(1); 	}					// 割禁解除 TP#1=割禁状態
 

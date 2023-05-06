@@ -38,7 +38,7 @@ SOFTWARE.
 
 
 //---------------------------------
-//  NORTi用10msec割込み処理(FITモジュール利用)
+//  NORTi用10msec割り込み処理(FITモジュール利用)
 //---------------------------------
 #include "r_cmt_rx_if.h"
 static uint32_t cmt_10msec_ch = 0xffffffff;
@@ -189,7 +189,7 @@ TASK task2(int stacd)       // タスク２(task2)
     get_pri(0, &pri);
     gg_printf("\n** task2 ** stacd=%d, tskpri=%d\n", stacd, pri);
     gg_printf("def_inh()によるNORTi標準割り込みルーチンの実験--\n");
-    gg_printf("norti_TMR1_def_inh()\n");    norti_TMR1_def_inh();   // TMR1の割込み処理の登録(def_inh())
+    gg_printf("norti_TMR1_def_inh()\n");    norti_TMR1_def_inh();   // TMR1の割り込み処理の登録(def_inh())
     gg_printf("R_Config_TMR1_Start()\n");   R_Config_TMR1_Start();
     for (;;) {
         slp_tsk();
@@ -219,7 +219,7 @@ TASK task3(int stacd)       // タスク３(task3)
     get_pri(0, &pri);
     gg_printf("\n** task3 ** stacd=%d, tskpri=%d\n", stacd, pri);
     gg_printf("cre_isr()によるNORTi標準割り込みサービスルーチンの実験--\n");
-    gg_printf("norti_TMR2_cre_isr()\n");    norti_TMR2_cre_isr();   // TMR2の割込みサービスルーチンの登録(cre_isr())
+    gg_printf("norti_TMR2_cre_isr()\n");    norti_TMR2_cre_isr();   // TMR2の割り込みサービスルーチンの登録(cre_isr())
     gg_printf("R_Config_TMR2_Start()\n");   R_Config_TMR2_Start();
     for (;;) {
         slp_tsk();
@@ -244,7 +244,7 @@ TASK task4(int stacd)       // タスク４(task4)
     get_pri(0, &pri);
     gg_printf("\n** task4 ** stacd=%d, tskpri=%d\n", stacd, pri);
     gg_printf("非NORTi割り込みによるコールバックの実験--\n");
-    gg_printf("nonOS_TMR3_def_inh()\n");    nonOS_TMR3_def_inh();   // TMR2の非NORTi割込みの登録(def_inh())
+    gg_printf("nonOS_TMR3_def_inh()\n");    nonOS_TMR3_def_inh();   // TMR2の非NORTi割り込みの登録(def_inh())
     gg_printf("R_Config_TMR3_Start()\n");   R_Config_TMR3_Start();
     for (;;) {
         if (task4_counter) {
@@ -262,11 +262,11 @@ TASK task4(int stacd)       // タスク４(task4)
 
 void main(void)
 {
-    GG_DI_ON();     // 割込み禁止
+    GG_DI_ON();     // 割り込み禁止
 
     sysini();       // NORTi初期化
 
-    // CMT(FITモジュール) タイマ設定(10msec周期割込み)
+    // CMT(FITモジュール) タイマ設定(10msec周期割り込み)
     R_CMT_CreatePeriodic(100, cmt_10msec_callback, &cmt_10msec_ch);
 
     // タスク生成
