@@ -113,15 +113,17 @@ uint8_t NORTi_INT_HOOK_KNL_LEVEL = KNL_LEVEL;
 
 ソフトウェア割り込み発生から実際の割り込み処理に到達するまでの時間を観測しました。  
 
-|処理ケース|実測値|
-|---|---|
-|① CCRX 割り込みルーチン(#pragma interrupt)  | 0.66usec|
-|② NORTi CCRX割り込み対応(ient_int())  | 1.25usec|
-|③ NORTi 割り込みハンドラ(def_inh())  | 1.12usec|
-|④ NORTi 割り込みサービスルーチン(cre_isr())  | 1.22usec|
-|⑤ NoMaYさんフックルーチン 割り込みレベル自動判定なし (NORTi_interrupt.c)  | 1.40usec|
-|⑥ NoMaYさんフックルーチン 割り込みレベル自動判定あり (NORTi_interrupt_safe.c)  | 1.50usec(≦KNL_LEVEL)|
-||1.04usec(> KNL_LEVEL)|
+|処理ケース|実測値|API|
+|---|---|---|
+|① CCRX 割り込みルーチン(#pragma interrupt)  | 0.66usec|×|
+|② NORTi CCRX割り込み対応(ient_int())  | 1.25usec|〇|
+|③ NORTi 割り込みハンドラ(def_inh())  | 1.12usec|〇|
+|④ NORTi 割り込みサービスルーチン(cre_isr())  | 1.22usec|〇|
+|⑤ NoMaYさんフックルーチン 割り込みレベル自動判定なし (NORTi_interrupt.c)  | 1.40usec|〇|
+|⑥ NoMaYさんフックルーチン 割り込みレベル自動判定あり (NORTi_interrupt_safe.c)  | 1.50usec(≦KNL_LEVEL)|〇|
+||1.04usec(> KNL_LEVEL)|×|
+
+<sub>API：NORTiのAPI呼出の可否</sub>  
 
 【条件】  
 ・Target Board for RX130,CS+  
