@@ -109,7 +109,7 @@ uint8_t NORTi_INT_HOOK_KNL_LEVEL = KNL_LEVEL;
 
 <br /><br /><br />
 
-## 応答時間(Target Board for RX130,CS+)
+## 応答時間(Target Board for RX65N,CS+)
 
 ソフトウェア割り込み発生から実際の割り込み処理に到達するまでの時間を観測しました。  
 
@@ -126,7 +126,7 @@ uint8_t NORTi_INT_HOOK_KNL_LEVEL = KNL_LEVEL;
 <sub>API：NORTiのAPI呼出の可否</sub>  
 
 【条件】  
-・Target Board for RX130,CS+  
+・Target Board for RX65N,CS+  
 ・システムクロック(ICLK)=120MHz  
 
 <br />
